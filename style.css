@@ -1,0 +1,205 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --deep-blue: #0a1628;
+    --ocean-blue: #1a3a5c;
+    --teal: #2d5a7b;
+    --foam: #7eb8c4;
+    --pearl: #e8f4f8;
+    --glow: rgba(126, 184, 196, 0.3);
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+    background: var(--deep-blue);
+    color: var(--pearl);
+    overflow-x: hidden;
+    position: relative;
+}
+
+.ocean-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(180deg, 
+            var(--deep-blue) 0%, 
+            var(--ocean-blue) 50%, 
+            var(--teal) 100%);
+    z-index: -2;
+}
+
+.ocean-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at 20% 80%, rgba(126, 184, 196, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(126, 184, 196, 0.15) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    animation: shimmer 15s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particles::before,
+.particles::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--foam);
+    border-radius: 50%;
+    box-shadow: 
+        10% 20% var(--foam),
+        20% 80% var(--foam),
+        30% 40% var(--foam),
+        40% 60% var(--foam),
+        50% 30% var(--foam),
+        60% 70% var(--foam),
+        70% 50% var(--foam),
+        80% 90% var(--foam),
+        90% 10% var(--foam);
+    animation: float 20s linear infinite;
+}
+
+.particles::after {
+    animation-delay: -10s;
+    opacity: 0.5;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+}
+
+.mermaid-art {
+    font-size: 0.7rem;
+    line-height: 1.2;
+    color: var(--foam);
+    text-shadow: 
+        0 0 10px var(--glow),
+        0 0 20px var(--glow),
+        0 0 30px rgba(126, 184, 196, 0.2);
+    margin-bottom: 2rem;
+    white-space: pre;
+    opacity: 0.9;
+    animation: breathe 6s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.02); opacity: 1; }
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: 300;
+    letter-spacing: 0.5em;
+    color: var(--pearl);
+    text-shadow: 
+        0 0 20px var(--glow),
+        0 0 40px rgba(126, 184, 196, 0.2),
+        0 0 60px rgba(126, 184, 196, 0.1);
+    margin-bottom: 1rem;
+    animation: fadeInUp 2s ease-out;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--foam);
+    opacity: 0.8;
+    margin-bottom: 3rem;
+    animation: fadeInUp 2s ease-out 0.5s both;
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: var(--foam);
+    opacity: 0.7;
+    animation: fadeInUp 2s ease-out 1s both;
+}
+
+.description p {
+    margin-bottom: 0.5rem;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+footer {
+    padding: 2rem;
+    text-align: center;
+    color: var(--foam);
+    opacity: 0.5;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    .mermaid-art {
+        font-size: 0.5rem;
+    }
+    
+    .title {
+        font-size: 2.5rem;
+        letter-spacing: 0.3em;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .description {
+        font-size: 0.9rem;
+    }
+}
